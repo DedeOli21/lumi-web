@@ -104,14 +104,13 @@ export function Invoices() {
         setInvoices((prev) => [...prev, uploadedInvoice]);
       } else {
         setSelectedClient(uploadedClientId);
-        const freshRes = await api.get('/invoices', {
+        await api.get('/invoices', {
           params: {
             client_id: uploadedClientId,
             year: selectedYear,
             month: selectedMonth || undefined,
           },
         }).then((res) => {
-          console.log('📦 Resposta da API:', res.data);
           setInvoices(res.data);
         });
       }
