@@ -1,46 +1,53 @@
-# React + TypeScript + Vite
+## 📄 Descrição do Projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **lumi-web** é o front-end em React responsável por:
+- Exibir dashboard com gráficos de consumo e economia.
+- Listar faturas com filtros por cliente e mês.
+- Permitir download dos PDFs das faturas.
 
-Currently, two official plugins are available:
+## 📚 Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**
+- **React Router DOM**
+- **Recharts** (gráficos)
+- **Axios** (requisições)
+- **Vercel** (deploy)
 
-## Expanding the ESLint configuration
+## ⚙️ Instalação e Execução Local
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Clone o projeto
+git clone https://github.com/DedeOli21/lumi-web.git
+cd lumi-web
 
-```js
-export default tseslint.config({
-  extends: [
-    ...tseslint.configs.recommendedTypeChecked,
-    ...tseslint.configs.strictTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Instale as dependências
+npm install
+
+# Configure variáveis de ambiente (ex: REACT_APP_API_URL)
+
+# Rode a aplicação
+npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📊 Funcionalidades
 
-```js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Dashboard
+- Gráficos comparativos de energia e valores financeiros
+- Cards com totais acumulados
 
-export default tseslint.config({
-  plugins: {
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Biblioteca de Faturas
+- Filtro por cliente e mês
+- Visualização de dados por fatura
+- Download do PDF original
+
+## 🛠️ Deploy no Vercel
+
+- Conecte o repositório no [Vercel](https://vercel.com)
+- Configure `REACT_APP_API_URL` nas variáveis do projeto
+- Deploy automático após push na branch main
+- URL gerada: `https://lumi-web.vercel.app` (ou similar)
+
+---
+
+Feito com ❤️ por [@DedeOli21](https://github.com/DedeOli21)
+
