@@ -26,12 +26,10 @@ export function Invoices() {
 
   const navigate = useNavigate();
 
-  // Buscar todos os clientes ao carregar
   useEffect(() => {
     api.get('/clients').then((res) => setClients(res.data));
   }, []);
 
-  // Buscar anos disponíveis com base nos monthReferences e remover duplicados
   useEffect(() => {
     if (!selectedClient) return;
 
@@ -39,7 +37,7 @@ export function Invoices() {
       const monthRefs: string[] = res.data;
 
       const years = monthRefs
-        .map((ref) => ref.split('/')[1]) // pega "2024"
+        .map((ref) => ref.split('/')[1])
         .filter((y): y is string => !!y);
 
       let uniqueYears = Array.from(new Set(years));
@@ -53,9 +51,7 @@ export function Invoices() {
     });
   }, [selectedClient]);
 
-  // Buscar meses disponíveis quando ano mudar
   useEffect(() => {
-    // if (!selectedYear || !selectedClient) return;
 
     api
       .get(`/invoices/months?client_id=${selectedClient}&year=${selectedYear}`)
@@ -66,9 +62,7 @@ export function Invoices() {
       });
   }, [selectedYear, selectedClient]);
 
-  // Buscar faturas quando cliente, ano e mês estiverem preenchidos
   useEffect(() => {
-    // if (!selectedClient || !selectedYear) return;
 
     api
       .get('/invoices', {
@@ -123,7 +117,7 @@ export function Invoices() {
     };
   
     const monthData = monthMap[mon.toUpperCase()];
-    if (!monthData) return { value: '', label: ref }; // fallback
+    if (!monthData) return { value: '', label: ref };
   
     return {
       value: monthData.value,
@@ -209,7 +203,7 @@ export function Invoices() {
             </span>
 
             <a
-              href={`http://localhost:3000/invoices/${inv.id}/download`} // ajuste porta/url conforme necessário
+              href={`http://localhost:3000/invoices/${inv.id}/download`}
               style={{ ...styles.button, textDecoration: 'none', display: 'inline-block' }}
               download
               target="_blank"
@@ -247,10 +241,6 @@ export function Invoices() {
     </div>
   );
 }
-
-// Estilos permanecem os mesmos (styles)
-
-
 const styles = {
 
   

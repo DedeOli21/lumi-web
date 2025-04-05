@@ -17,8 +17,8 @@ export function Dashboard() {
   useEffect(() => {
     async function load() {
       const res = await api.get('/dashboard');
-      setData(res.data.graphData); // Espera que backend traga array com dados para gráficos
-      setSummary(res.data.summary); // { totalKwh, totalCompensated, ... }
+      setData(res.data.graphData);
+      setSummary(res.data.summary);
     }
     load();
   }, []);
