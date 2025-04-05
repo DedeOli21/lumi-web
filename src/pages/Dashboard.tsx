@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
+import { CSSProperties } from 'react';
+
 
 export function Dashboard() {
   const [data, setData] = useState([]);
@@ -78,7 +80,7 @@ export function Dashboard() {
   );
 }
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
   container: {
     maxWidth: '900px',
     margin: '2rem auto',

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { CSSProperties } from 'react';
 
 interface Client {
   id: number;
@@ -199,7 +200,7 @@ export function Invoices() {
         {invoices.map((inv) => (
           <li key={inv.id} style={styles.invoiceItem}>
             <span>
-              {inv.client.name} — {inv.monthReference}
+              {inv.id} — {inv.monthReference}
             </span>
 
             <a
@@ -241,7 +242,8 @@ export function Invoices() {
     </div>
   );
 }
-const styles = {
+
+const styles: Record<string, CSSProperties> = {
 
   
   container: {
