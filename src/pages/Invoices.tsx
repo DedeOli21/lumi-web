@@ -220,7 +220,7 @@ export function Invoices() {
               {inv.client.name} — {inv.monthReference}
             </span>
             <a
-              href={`http://localhost:3000/invoices/${inv.id}/download`}
+              href={`https://api-lumi-production.up.railway.app/invoices/${inv.id}/download`}
               style={{
                 ...styles.button,
                 textDecoration: 'none',
