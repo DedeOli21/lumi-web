@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 import { CSSProperties } from 'react';
 
-
 export function Dashboard() {
   const [data, setData] = useState([]);
   const [summary, setSummary] = useState({
@@ -13,17 +12,30 @@ export function Dashboard() {
     valueWithoutGd: 0,
     gdEconomy: 0,
   });
+  const [clients, setClients] = useState([]);
+  const [selectedClientId, setSelectedClientId] = useState<string>(''); // '' representa "todos"
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function load() {
-      const res = await api.get('/dashboard');
+    async function loadClients() {
+      const res = await api.get('/clients');
+      setClients(res.data);
+    }
+
+    loadClients();
+  }, []);
+
+  useEffect(() => {
+    async function loadDashboard() {
+      const params = selectedClientId ? { client_id: selectedClientId } : {};
+      const res = await api.get('/dashboard', { params });
       setData(res.data.graphData);
       setSummary(res.data.summary);
     }
-    load();
-  }, []);
+
+    loadDashboard();
+  }, [selectedClientId]);
 
   return (
     <div style={styles.container}>
@@ -32,6 +44,24 @@ export function Dashboard() {
       </button>
 
       <h1 style={styles.title}>📊 Dashboard</h1>
+
+      {/* Filtro de Cliente */}
+      <div style={styles.filterContainer}>
+        <label htmlFor="client-filter" style={styles.filterLabel}>Filtrar por Cliente:</label>
+        <select
+          id="client-filter"
+          value={selectedClientId}
+          onChange={(e) => setSelectedClientId(e.target.value)}
+          style={styles.select}
+        >
+          <option value="">Todos os clientes</option>
+          {clients.map((client: any) => (
+            <option key={client.id} value={client.id}>
+              {client.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {/* Cards Resumo */}
       <div style={styles.cardGrid}>
@@ -119,5 +149,26 @@ const styles: Record<string, CSSProperties> = {
     fontWeight: 'bold',
     cursor: 'pointer',
     marginBottom: '1rem',
+  },
+  filterContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '1.5rem',
+    gap: '0.5rem',
+  },
+  
+  filterLabel: {
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  
+  select: {
+    padding: '0.5rem 1rem',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    backgroundColor: '#fff',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+    fontSize: '1rem',
+    cursor: 'pointer',
   },
 };
