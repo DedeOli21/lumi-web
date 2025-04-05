@@ -13,6 +13,7 @@ interface Invoice {
   id: number;
   monthReference: string;
   createdAt: string;
+  client: Client
 }
 
 export function Invoices() {
@@ -200,7 +201,7 @@ export function Invoices() {
         {invoices.map((inv) => (
           <li key={inv.id} style={styles.invoiceItem}>
             <span>
-              {inv.id} — {inv.monthReference}
+              {inv.client.name} — {inv.monthReference}
             </span>
 
             <a
